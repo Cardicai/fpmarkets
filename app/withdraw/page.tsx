@@ -1,18 +1,31 @@
 import Surface from "@/components/ui/Surface";
 
-export default function Withdraw(){
+export const metadata = { title: "Withdraw" };
+
+export default function WithdrawPage() {
   return (
-    <main className="min-h-screen bg-[#070a11] text-white">
-      <section className="mx-auto max-w-lg p-6 space-y-4">
-        <h1 className="text-xl font-semibold">Withdrawal</h1>
-        <Surface className="p-5 space-y-4">
-          <label className="block">
-            <span className="text-sm opacity-80">Amount (NGN)</span>
-            <input className="mt-1 w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10" placeholder="3000" />
-          </label>
-          <button className="w-full rounded-xl bg-white/10 border border-white/15 py-2 hover:bg-white/20">
-            Request
-          </button>
+    <main>
+      <section style={{maxWidth: 640, margin: "0 auto", padding: 24}}>
+        <h1 style={{fontSize: 20, fontWeight: 600, marginBottom: 12}}>Withdrawal</h1>
+        <Surface>
+          <div style={{display:"grid", gap: 10}}>
+            <div style={{display:"grid", gap:6}}>
+              <label style={{fontSize: 12, opacity: .7}}>Amount (NGN)</label>
+              <input
+                readOnly
+                placeholder="Enter amount"
+                value="0.00"
+                style={{
+                  width:"100%", padding:"10px 12px", borderRadius:12,
+                  border:"1px solid rgba(255,255,255,.18)", background:"rgba(255,255,255,.06)",
+                  color:"inherit"
+                }}
+              />
+              <div style={{fontSize:12,opacity:.7}}>
+                Note: Buttons disabled in static build. We’ll re-enable after deploy.
+              </div>
+            </div>
+          </div>
         </Surface>
       </section>
     </main>
