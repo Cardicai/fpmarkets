@@ -1,34 +1,10 @@
-"use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-const tabs = [
-  { href: "/invest", label: "Home" },
-  { href: "/invest#products", label: "Invest" },
-  { href: "/team", label: "Team" },
-  { href: "/mine", label: "Mine" },
-];
-
-export default function TabBar() {
-  const pathname = usePathname() || "/";
+export default function TabBar(){
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-40 border-t border-white/10 bg-black/60 backdrop-blur-sm">
-      <div className="mx-auto max-w-5xl grid grid-cols-4">
-        {tabs.map((t) => {
-          const active =
-            pathname.startsWith(t.href) ||
-            (t.href.includes("#") && pathname.startsWith("/invest"));
-          return (
-            <Link
-              key={t.href}
-              href={t.href.replace("#products","")}
-              className={`flex items-center justify-center py-3 text-sm transition ${active ? "text-white" : "text-white/60 hover:text-white"}`}
-            >
-              {t.label}
-            </Link>
-          );
-        })}
-      </div>
+    <nav style={{position:"fixed",left:0,right:0,bottom:0,background:"rgba(0,0,0,.6)",backdropFilter:"blur(6px)",borderTop:"1px solid rgba(255,255,255,.12)",display:"grid",gridTemplateColumns:"repeat(3,1fr)"}}>
+      <Link href="/invest" style={{padding:12,textAlign:"center",color:"#cfe9ff"}}>Invest</Link>
+      <Link href="/team"   style={{padding:12,textAlign:"center",color:"#cfe9ff"}}>Team</Link>
+      <Link href="/mine"   style={{padding:12,textAlign:"center",color:"#cfe9ff"}}>Mine</Link>
     </nav>
   );
 }

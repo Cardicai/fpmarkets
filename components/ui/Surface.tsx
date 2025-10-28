@@ -1,8 +1,3 @@
-import { ReactNode } from "react";
-export default function Surface({children, className=""}:{children:ReactNode; className?:string}) {
-  return (
-    <div className={`rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_40px_rgba(0,160,255,0.08)] ${className}`}>
-      {children}
-    </div>
-  );
+export default function Surface({children}:{children:React.ReactNode}) {
+  return <div style={{border:"1px solid rgba(255,255,255,.12)",background:"rgba(255,255,255,.05)",borderRadius:16,padding:16,boxShadow:"0 0 30px rgba(0,160,255,.08)"}}>{children}</div>;
 }
