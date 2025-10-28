@@ -1,22 +1,15 @@
-import * as React from "react";
+import { ReactNode } from "react";
 
-type Props = React.PropsWithChildren<{
+export default function Surface({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
-}>;
-
-export default function Surface({ children, className, style }: Props) {
+}) {
   return (
     <div
-      className={className}
-      style={{
-        border: "1px solid rgba(255,255,255,.12)",
-        background: "rgba(255,255,255,.05)",
-        borderRadius: 16,
-        padding: 16,
-        boxShadow: "0 0 30px rgba(0,160,255,.08)",
-        ...(style || {}),
-      }}
+      className={`rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_0_50px_rgba(14,116,144,0.12)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-0.5 hover:border-sky-400/30 hover:shadow-[0_0_60px_rgba(56,189,248,0.25)] ${className}`}
     >
       {children}
     </div>
