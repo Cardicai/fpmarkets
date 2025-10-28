@@ -1,4 +1,32 @@
-html,body{margin:0;background:#070a11;color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{padding:24px}
-a{color:#7cd1ff;text-decoration:none}
-a:hover{text-decoration:underline}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  @apply bg-slate-950 text-slate-100 min-h-full;
+  font-family: "Inter", "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+a {
+  @apply text-sky-300 hover:text-sky-200 hover:no-underline;
+}
+
+body {
+  @apply antialiased;
+}
+
+main {
+  @apply px-6 py-10 lg:px-12;
+}
+
+.gradient-overlay {
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.25), transparent 45%),
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(236, 72, 153, 0.2), transparent 45%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.92));
+}
