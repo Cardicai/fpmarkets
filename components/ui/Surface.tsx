@@ -10,11 +10,11 @@ export default function Surface({ children, className, style }: Props) {
     <div
       className={className}
       style={{
-        border: "1px solid rgba(255,255,255,.12)",
-        background: "rgba(255,255,255,.05)",
+        border: "1px solid var(--surface-border, rgba(255,255,255,.12))",
+        background: "var(--surface-bg, rgba(255,255,255,.05))",
         borderRadius: 16,
         padding: 16,
-        boxShadow: "0 0 30px rgba(0,160,255,.08)",
+        boxShadow: "var(--surface-shadow, 0 0 30px rgba(0,160,255,.08))",
         ...(style || {}),
       }}
     >
