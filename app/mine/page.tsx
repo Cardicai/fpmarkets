@@ -1,38 +1,303 @@
-import Link from "next/link"; import Surface from "@/components/ui/Surface"; import TabBar from "@/components/ui/TabBar"; import { naira } from "@/components/ui/NA";
-export default function Mine(){
-  const Menu = ({label,href}:{label:string;href:string}) => (
-    <Link href={href} style={{display:"block",padding:"14px 16px",background:"rgba(255,255,255,.06)",borderTop:"1px solid rgba(255,255,255,.12)",textDecoration:"none",color:"inherit"}}>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}><span>{label}</span><span style={{opacity:.6}}>›</span></div>
-    </Link>
-  );
+import Link from "next/link";
+import Surface from "@/components/ui/Surface";
+import TabBar from "@/components/ui/TabBar";
+import { naira } from "@/components/ui/NA";
+
+const quickStats = [
+  {
+    label: "ROI today",
+    value: "+64%",
+    detail: "Credited nightly at 23:59 WAT",
+  },
+  {
+    label: "Earned this week",
+    value: naira(186000),
+    detail: "Auto-withdraw in 3 days",
+  },
+  {
+    label: "Referral bonus",
+    value: naira(42000),
+    detail: "Squad Lagos online",
+  },
+];
+
+const menuItems = [
+  {
+    label: "Top up",
+    description: "Fund your vault instantly",
+    href: "/deposit",
+    icon: "⬆️",
+  },
+  {
+    label: "Withdrawal",
+    description: "Cash out profits securely",
+    href: "/withdraw",
+    icon: "⬇️",
+  },
+  {
+    label: "Invite friends to earn",
+    description: "Share your code for squad rewards",
+    href: "/invite",
+    icon: "🤝",
+  },
+  {
+    label: "VIP centre",
+    description: "Review your privilege perks",
+    href: "/vip",
+    icon: "👑",
+  },
+  {
+    label: "Points mall",
+    description: "Redeem loyalty gifts",
+    href: "/points",
+    icon: "🎁",
+  },
+  {
+    label: "Bind a bank card",
+    description: "Link preferred payout channels",
+    href: "/banking",
+    icon: "💳",
+  },
+  {
+    label: "Change withdrawal password",
+    description: "Refresh your security pin",
+    href: "/security",
+    icon: "🔐",
+  },
+  {
+    label: "My income",
+    description: "Track ROI statements",
+    href: "/income",
+    icon: "📈",
+  },
+  {
+    label: "Account details",
+    description: "Update your profile data",
+    href: "/settings",
+    icon: "🧾",
+  },
+];
+
+const documentShortcuts = [
+  {
+    name: "Consolidated statement",
+    detail: "Updated 2 days ago",
+    href: "/docs/statement",
+  },
+  {
+    name: "Tax report (FY 2023)",
+    detail: "Awaiting signature",
+    href: "/docs/tax",
+  },
+  {
+    name: "KYC dossier",
+    detail: "Verified • Expires Sep 2025",
+    href: "/docs/kyc",
+  },
+];
+
+const dashboardMetrics = [
+  {
+    label: "Projected ROI today",
+    value: "+64%",
+    trend: "▲ 2.1% vs avg",
+  },
+  {
+    label: "Auto-withdraw timer",
+    value: "03:12:48",
+    trend: "Next trigger",
+  },
+  {
+    label: "Investors synced",
+    value: "4 squads",
+    trend: "All online",
+  },
+];
+
+const dashboardProjects = [
+  {
+    name: "Dubai Private Credit",
+    roi: "66% daily",
+    progress: 0.78,
+  },
+  {
+    name: "Netherlands Wind Equity",
+    roi: "62% daily",
+    progress: 0.64,
+  },
+  {
+    name: "Kenya Harvest Villas",
+    roi: "60% daily",
+    progress: 0.52,
+  },
+];
+
+const dashboardStream = [
+  "08:40 • Top up ₦120,000 credited",
+  "08:12 • ROI +64% released to NGN wallet",
+  "07:58 • VIP centre unlocked fresh perks",
+  "07:21 • Team Lagos hit 110% of quota",
+  "06:40 • Withdrawal ₦85,000 scheduled",
+  "06:05 • Referral bonus ₦32,000 earned",
+];
+
+export default function Mine() {
   return (
-    <main>
-      <Surface>
-        <div style={{display:"flex",justifyContent:"space-between"}}>
-          <div>
-            <div style={{color:"#facc15",fontWeight:600}}>VIP 1</div>
-            <div style={{opacity:.7,fontSize:12}}>Cooperation number</div>
-            <div style={{fontSize:18,fontWeight:800,letterSpacing:.5}}>303659</div>
-          </div>
-          <div style={{textAlign:"right"}}>
-            <div style={{opacity:.7,fontSize:12}}>Balance</div>
-            <div style={{fontSize:22,fontWeight:800,color:"#7cd1ff"}}>{naira(280.27)}</div>
-          </div>
-        </div>
-      </Surface>
+    <main className="profile-page profile-page--mobile">
+      <section className="profile-mobile">
+        <Surface className="profile-mobile__identity-card">
+          <div className="profile-mobile__identity-glow" aria-hidden="true" />
 
-      <div style={{border:"1px solid rgba(255,255,255,.12)",borderRadius:16,overflow:"hidden",marginTop:16}}>
-        <Menu label="Invite friend to earn income" href="/share" />
-        <Menu label="Sign in" href="/login" />
-        <Menu label="VIP" href="/vip" />
-        <Menu label="Private message" href="/messages" />
-        <Menu label="Points Mall" href="/points" />
-        <Menu label="Change password" href="/account/security" />
-        <Menu label="Bind a bank card" href="/bank" />
-      </div>
+          <header className="profile-mobile__identity-head">
+            <span className="profile-mobile__identity-title">My account</span>
+            <span className="profile-mobile__identity-medal">
+              <span className="profile-mobile__identity-medal-icon">🏅</span>
+              <span className="profile-mobile__identity-medal-tier">VIP 1</span>
+            </span>
+          </header>
 
-      <div style={{height:56}}/>
-      <TabBar/>
+          <div className="profile-mobile__identity-main">
+            <div
+              className="profile-mobile__identity-avatar"
+              role="img"
+              aria-label="Sola Gbadamosi profile photo"
+            />
+
+            <div className="profile-mobile__identity-meta">
+              <h1 className="profile-mobile__identity-name">Sola Gbadamosi</h1>
+              <div className="profile-mobile__identity-row">
+                <span className="profile-mobile__identity-label">Nickname</span>
+                <span className="profile-mobile__identity-value">
+                  solagbada
+                  <span className="profile-mobile__identity-edit" aria-hidden="true">
+                    ✎
+                  </span>
+                </span>
+              </div>
+              <div className="profile-mobile__identity-row">
+                <span className="profile-mobile__identity-label">Coop ID</span>
+                <span className="profile-mobile__identity-value">303659</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="profile-mobile__balance">
+            <span>Current balance</span>
+            <strong>{naira(280270)}</strong>
+          </div>
+
+          <div className="profile-mobile__actions">
+            <Link
+              href="/deposit"
+              className="profile-mobile__action profile-mobile__action--primary"
+            >
+              Deposit
+            </Link>
+            <Link href="/withdraw" className="profile-mobile__action">
+              Withdrawal
+            </Link>
+            <Link href="/banking" className="profile-mobile__action">
+              My cards
+            </Link>
+          </div>
+        </Surface>
+
+        <Surface className="profile-mobile__stat-card">
+          <div className="profile-mobile__stats">
+            {quickStats.map((stat) => (
+              <div key={stat.label} className="profile-mobile__stat">
+                <span>{stat.label}</span>
+                <strong>{stat.value}</strong>
+                <p>{stat.detail}</p>
+              </div>
+            ))}
+          </div>
+        </Surface>
+
+        <Surface className="profile-mobile__menu-card">
+          <header>
+            <h2>Account console</h2>
+            <p>Manage your funding, rewards and personal settings.</p>
+          </header>
+          <div className="profile-mobile__menu-list">
+            {menuItems.map((item) => (
+              <Link key={item.label} href={item.href} className="profile-mobile__menu-row">
+                <span className="profile-mobile__menu-icon">{item.icon}</span>
+                <div className="profile-mobile__menu-copy">
+                  <strong>{item.label}</strong>
+                  <p>{item.description}</p>
+                </div>
+                <span className="profile-mobile__menu-caret">›</span>
+              </Link>
+            ))}
+          </div>
+        </Surface>
+
+        <Surface className="profile-mobile__documents">
+          <header>
+            <h2>Documents & proofs</h2>
+            <p>Always accessible for audits and compliance reviews.</p>
+          </header>
+          <div className="profile-mobile__document-list">
+            {documentShortcuts.map((doc) => (
+              <Link key={doc.name} href={doc.href} className="profile-mobile__document">
+                <div>
+                  <strong>{doc.name}</strong>
+                  <p>{doc.detail}</p>
+                </div>
+                <span>↗</span>
+              </Link>
+            ))}
+          </div>
+        </Surface>
+
+        <Surface className="profile-demo profile-demo--mobile">
+          <header className="profile-demo__head">
+            <div>
+              <span>Running demo dashboard</span>
+              <h2>Live investor pulse</h2>
+            </div>
+            <span className="profile-demo__status">Live</span>
+          </header>
+
+          <div className="profile-demo__grid">
+            {dashboardMetrics.map((metric) => (
+              <div key={metric.label} className="profile-demo__metric">
+                <span>{metric.label}</span>
+                <strong>{metric.value}</strong>
+                <p>{metric.trend}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="profile-demo__projects">
+            {dashboardProjects.map((project) => (
+              <div key={project.name} className="profile-demo__project">
+                <div>
+                  <span className="profile-demo__project-name">{project.name}</span>
+                  <span className="profile-demo__project-roi">{project.roi}</span>
+                </div>
+                <div className="profile-demo__bar">
+                  <div style={{ width: `${Math.round(project.progress * 100)}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="profile-demo__stream">
+            <span className="profile-demo__live-dot" />
+            <div className="profile-demo__ticker">
+              <div className="profile-demo__ticker-track">
+                {[...dashboardStream, ...dashboardStream].map((entry, index) => (
+                  <span key={`${entry}-${index}`}>{entry}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Surface>
+      </section>
+
+      <TabBar />
     </main>
   );
 }
