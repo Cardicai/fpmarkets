@@ -1,10 +1,34 @@
+"use client";
+
 import Link from "next/link";
-export default function TabBar(){
+import { usePathname } from "next/navigation";
+
+const links = [
+  { href: "/invest", label: "Invest", icon: "💼" },
+  { href: "/team", label: "Team", icon: "🤝" },
+  { href: "/mine", label: "Profile", icon: "👤" },
+];
+
+export default function TabBar() {
+  const pathname = usePathname();
+
   return (
-    <nav style={{position:"fixed",left:0,right:0,bottom:0,background:"rgba(0,0,0,.6)",backdropFilter:"blur(6px)",borderTop:"1px solid rgba(255,255,255,.12)",display:"grid",gridTemplateColumns:"repeat(3,1fr)"}}>
-      <Link href="/invest" style={{padding:12,textAlign:"center",color:"#cfe9ff"}}>Invest</Link>
-      <Link href="/team"   style={{padding:12,textAlign:"center",color:"#cfe9ff"}}>Team</Link>
-      <Link href="/mine"   style={{padding:12,textAlign:"center",color:"#cfe9ff"}}>Mine</Link>
+    <nav className="tab-bar" aria-label="Primary">
+      {links.map((link) => {
+        const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`tab-bar__link${isActive ? " tab-bar__link--active" : ""}`}
+            aria-current={isActive ? "page" : undefined}
+          >
+            <span className="tab-bar__icon" aria-hidden>{link.icon}</span>
+            <span className="tab-bar__label">{link.label}</span>
+          </Link>
+        );
+      })}
     </nav>
   );
 }
