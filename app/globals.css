@@ -3776,3 +3776,6 @@ a:hover {
     font-size: 11px;
   }
 }
+
+:root { color-scheme: dark; }
+html, body { scroll-behavior: smooth; }
