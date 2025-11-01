@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1200">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0a0f18"/><stop offset="1" stop-color="#0b3b5c"/></linearGradient></defs>
+  <rect width="100%" height="100%" fill="url(#g)"/>
+  <text x="50%" y="50%" fill="#8bd3ff" font-size="72" font-family="Arial" text-anchor="middle">Markets Hero</text>
+</svg>
