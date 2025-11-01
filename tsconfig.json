@@ -30,6 +30,7 @@
     ]
   },
   "include": [
+    "lib/**/*",
     "app/**/*",
     "components/**/*",
     ".next/types/**/*.ts"
