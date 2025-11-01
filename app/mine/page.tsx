@@ -11,6 +11,12 @@ import {
   type ActiveInvestment,
   type StoredInvestmentState,
 } from "@/components/invest/InvestExperience";
+import {
+  PROFILE_STORAGE_KEY,
+  defaultStoredProfile,
+  parseStoredProfile,
+  type StoredProfile,
+} from "@/lib/profile-storage";
 
 const defaultQuickStats = [
   {
@@ -29,22 +35,6 @@ const defaultQuickStats = [
     detail: "Squad Lagos online",
   },
 ];
-
-const PROFILE_STORAGE_KEY = "fpmarkets:profile-state";
-
-type ProfileState = {
-  name: string;
-  nickname: string;
-  coopId: string;
-  photo: string | null;
-};
-
-const defaultProfile: ProfileState = {
-  name: "Sola Gbadamosi",
-  nickname: "solagbada",
-  coopId: "303659",
-  photo: null,
-};
 
 const menuItems = [
   {
@@ -151,7 +141,7 @@ const fallbackDashboardStream = [
 ];
 
 export default function Mine() {
-  const [profile, setProfile] = useState<ProfileState>(defaultProfile);
+  const [profile, setProfile] = useState<StoredProfile>(defaultStoredProfile);
   const [profileHydrated, setProfileHydrated] = useState(false);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [currentBalance, setCurrentBalance] = useState(DEFAULT_INVESTMENT_BALANCE);
@@ -168,30 +158,17 @@ export default function Mine() {
     const raw = window.localStorage.getItem(PROFILE_STORAGE_KEY);
 
     if (!raw) {
-      setProfile(defaultProfile);
+      setProfile(defaultStoredProfile);
       setProfileHydrated(true);
       return;
     }
 
     try {
-      const parsed = JSON.parse(raw) as Partial<ProfileState>;
-      const name = typeof parsed?.name === "string" && parsed.name.trim()
-        ? parsed.name.trim()
-        : defaultProfile.name;
-      const nickname = typeof parsed?.nickname === "string" && parsed.nickname.trim()
-        ? parsed.nickname.trim()
-        : defaultProfile.nickname;
-      const coopId = typeof parsed?.coopId === "string" && parsed.coopId.trim()
-        ? parsed.coopId.trim()
-        : defaultProfile.coopId;
-      const photo = typeof parsed?.photo === "string" && parsed.photo.trim()
-        ? parsed.photo.trim()
-        : null;
-
-      setProfile({ name, nickname, coopId, photo });
+      const parsed = JSON.parse(raw);
+      setProfile(parseStoredProfile(parsed));
       setProfileHydrated(true);
     } catch (error) {
-      setProfile(defaultProfile);
+      setProfile(defaultStoredProfile);
       setProfileHydrated(true);
     }
   }, [profileHydrated]);
@@ -310,7 +287,7 @@ export default function Mine() {
     ];
   }, [activeInvestment, currentBalance, liveEarnings, roiPercent]);
 
-  const handleProfileSave = (next: ProfileState) => {
+  const handleProfileSave = (next: StoredProfile) => {
     setProfile(next);
     setIsEditingProfile(false);
   };
@@ -374,6 +351,24 @@ export default function Mine() {
                   >
                     ✎
                   </button>
+                </span>
+              </div>
+              <div className="profile-mobile__identity-row">
+                <span className="profile-mobile__identity-label">Location</span>
+                <span className="profile-mobile__identity-value">
+                  {profile.city}, {profile.region}, {profile.countryName}
+                </span>
+              </div>
+              <div className="profile-mobile__identity-row">
+                <span className="profile-mobile__identity-label">Currency</span>
+                <span className="profile-mobile__identity-value">
+                  {profile.currencySymbol} {profile.currencyCode}
+                </span>
+              </div>
+              <div className="profile-mobile__identity-row">
+                <span className="profile-mobile__identity-label">Phone</span>
+                <span className="profile-mobile__identity-value">
+                  {profile.dialCode} {profile.phoneNumber}
                 </span>
               </div>
             </div>
@@ -623,9 +618,9 @@ export default function Mine() {
 }
 
 type ProfileEditDialogProps = {
-  initialProfile: ProfileState;
+  initialProfile: StoredProfile;
   onClose: () => void;
-  onSave: (profile: ProfileState) => void;
+  onSave: (profile: StoredProfile) => void;
 };
 
 function ProfileEditDialog({ initialProfile, onClose, onSave }: ProfileEditDialogProps) {
